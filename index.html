@@ -6,6 +6,7 @@
 	<style type="text/css">
 		body {
 			width: 1500px;
+			height: max-content;
 			margin: 0%;
 		}
 
@@ -34,22 +35,29 @@
 		section {
 			display: block;
 			float: left;
-			width: 1080px;
+			width: 1150px;
 			height: 900px;
 			text-align: center;
-			padding: 50px;
+			padding-top: 10px;
+			padding-left: 10px;
+			padding-right: 10px;
 			margin-left: 14px;
 			margin-bottom: 14px;
+			background-image: url(./images/background.png);
+			background-repeat: no-repeat;
+			background-size : cover;
+
+			/* background-color: blue; */
 		}
 
 		aside {
 			display: block;
 			float: left;
 			width: 260px;
-			height: 960px;
-			text-align: center;
+			height: max-content;
 			padding: 20px;
-			background-color: white;
+			padding-left: 10px;
+			/* background-color: red; */
 			text-align: center;
 			border-right: 1px solid black;
 		}
@@ -84,9 +92,11 @@
 		}
 
 		iframe {
-			width: inherit;
-			height: inherit;
+			width: 700px;
+			height: 400px;
 			border: 0px;
+			float : left;
+			margin-top:40px;
 		}
 
 		#Menu {
@@ -101,16 +111,15 @@
 			background-color: #2d2d2d;
 			float: left;
 			line-height: 50px;
-			vertical-align: middle;
-			text-align: center;
+			/* vertical-align: middle;
+			text-align: center; */
 			margin-bottom: 2px;
 			border-top-left-radius: 5px;
 			border-top-right-radius: 5px;
 			border-bottom-right-radius: 5px;
 			border-bottom-left-radius: 5px;
-
 		}
-
+		
 		#Menu .menuLink {
 			text-decoration: none;
 			color: white;
@@ -121,7 +130,45 @@
 		}
 
 		#Menu .menuLink:hover {
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
 			background-color: #4d4d4d;
+		}
+
+		#Menu div {
+			list-style: none;
+			color: white;
+			background-color: white;
+			float: left;
+			line-height: 35px;
+			/* vertical-align: middle; */
+			/* text-align: center; */
+			margin-bottom: 2px;
+			
+		}
+
+		#Menu .menuDetail {
+			background-color: #8d8c8c;
+			text-decoration: none;
+			color: white;
+			display: block;
+			width: 260px;
+			font-size: 10px;
+			margin-bottom:2px;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
+		}
+
+		#Menu .menuDetail:hover {
+			background-color: #202020;
+			border-top-left-radius: 5px;
+			border-top-right-radius: 5px;
+			border-bottom-right-radius: 5px;
+			border-bottom-left-radius: 5px;
 		}
 
 		header input {
@@ -129,14 +176,85 @@
 			height: 30px;
 			float: right;
 		}
+
+		section div{
+			width: 400px;
+			height: inherit;
+			/* background-color: red; */
+			float:right;
+			padding:10px;
+			border-width: thick;
+    		border-color: #69c;
+			border-style : outset;
+		}
+
 	</style>
 	<base target="content">
 </head>
 
 <body>
+	<script type="text/javascript" language="JavaScript">
+		function switch_menu(obj) {
+			if (obj.style.display == 'none') obj.style.display = 'block';
+			else if (obj.style.display == 'block') obj.style.display = 'none';
+			change_size();
+		}
+		function lecture_change(str){
+			document.getElementById('content').src = "https://www.youtube.com/embed/" + str;
+		}
+		function searching(){
+			var str = document.getElementById('search_text').value;
+			var url = "https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=1&ie=utf8&query=" + str;
+			window.open(url);
+		}
+		function sendEmail()
+		{
+			var subject = document.getElementById("subjectTxt").value;
+    		var content = document.getElementById("contentTxt").value;
+    		document.location.href = "mailto:lsy920519@naver.com?subject="+ encodeURIComponent(subject)+ "&body=" + encodeURIComponent(content);
+		}
+		function clearMsg()
+		{
+			var clear_check = confirm("메모 내용을 초기화 하시겠습니까?");
+			if(clear_check == true)
+			{
+				document.getElementById("subjectTxt").value = "";
+				document.getElementById("contentTxt").value = "";
+			}		
+		}
+		function change_size()
+		{		
+			if(document.getElementById('menubar').style.display == 'none' && document.getElementById('notepad').style.display == 'block' )
+			{//메뉴바 비활성화 메모장 활성화
+				document.getElementById('mainSection').style.width = "1410px"
+				document.getElementById('content').style.width = "960px";
+				document.getElementById('content').style.height = "550px";
+			}
+			else if(document.getElementById('menubar').style.display == 'block' && document.getElementById('notepad').style.display == 'block')
+			{//두개다 활성화
+				document.getElementById('mainSection').style.width = "1150px"
+				document.getElementById('content').style.width = "700px";
+				document.getElementById('content').style.height = "400px";
+			}
+			else if(document.getElementById('menubar').style.display == 'none' && document.getElementById('notepad').style.display == 'none')
+			{//두개다 비활성화
+				document.getElementById('mainSection').style.width = "1410px"
+				document.getElementById('content').style.width = "1360px";
+				document.getElementById('content').style.height = "650px";
+			}
+			else if(document.getElementById('menubar').style.display == 'block' && document.getElementById('notepad').style.display == 'none')
+			{//메뉴바 활성화 메모장 비활성화
+				document.getElementById('mainSection').style.width = "1150px"
+				document.getElementById('content').style.width = "1100px";
+				document.getElementById('content').style.height = "600px";
+			}			
+		}
+
+	</script>
 	<center>
 		<header>S.Y's Github Page
-			<input type="image" src="./images/glass.png">
+			<input type="image" src="./images/glass.png" onclick="searching()">
+			<input type="text" id="search_text" style="width: 300px; height:24px;">
 		</header>
 
 		<hgroup>
@@ -146,38 +264,89 @@
 		</hgroup>
 
 		<hr style="align-self: center; width:1460px;">
-
-		<aside>
+		<input type="button" onClick="switch_menu(document.getElementById('menubar'));" style="float:left; width:20px; height: 300px; color:white; background-color:#4d4d4d">	
+		<aside id='menubar' style="display:block;">
 			<div>
 				<b style="font-size:30px;">Menu</b>
 				<br>
 				<hr>
 				<nav id="Menu">
 					<span>
-						<a class="menuLink" href="menu1.html">Node.js</a>
+						<a class="menuLink" href="javascript:void(0)" onclick="switch_menu(document.getElementById('menuDetail1')); return false;">Node.js</a>
 					</span>
+					<div id=menuDetail1 style="display:none;">
+						<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('GU36Z3exP2c'); return false;">node.js 소개</a>
+						<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('EcFLbFTcWFg'); return false;">node.js 개념</a>
+						<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('i4KHXNRVWfM'); return false;">node.js 패키지, 매니저, 웹프로그래밍</a>
+						<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('mUep2oybWJE'); return false;">node.js 를 이용한 실시간 웹</a>
+						<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('cnRrFA8fWMI'); return false;">node.js 더 많은 것들</a>
+					</div>
 					<span>
-						<a class="menuLink" href="menu2.html">Menu2</a>
+						<a class="menuLink" href="javascript:void(0)" onclick="switch_menu(document.getElementById('menuDetail2')); return false;">HTML</a>
 					</span>
+					<div id=menuDetail2 style="display:none;">
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('33DjsANwlJk'); return false;">기술 소개</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('jSJM9iOiQ1g'); return false;">기본 문법</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('AE7foaifXMU'); return false;">하이퍼텍스트와 속성</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('JiuYfoSEac4'); return false;">태그의 중첩과 목록</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('gqg-toXZ_rE'); return false;">문서의 구조</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('EgT5520Ztek'); return false;">DOCTYPE</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('Tt3kr7whkb4'); return false;">웹사이트 만들기</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('uim3Vr6crXI'); return false;">개발도구</a>
+						</div>
 					<span>
-						<a class="menuLink" href="menu2.html">Menu3</a>
+						<a class="menuLink" href="javascript:void(0)" onclick="switch_menu(document.getElementById('menuDetail3')); return false;">CSS</a>
 					</span>
+					<div id=menuDetail3 style="display:none;">
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('ONcmkf07EuI'); return false;">CSS 소개</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('i_6LzwRXtJw'); return false;">실습환경</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('YtGAuoFir8w'); return false;">HTML과 CSS가 만나는 법</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('Me7qCXl94nQ'); return false;">선택자와 선언</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('wNpplOPbMSc'); return false;">선택자의 종류</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('jdc-7VMNf9g'); return false;">부모 자식 선택자</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('UK9GF5Kg__A'); return false;">가상 클래스 선택자</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('hfg5mtXp1ng'); return false;">여러가지 선택자들</a>
+						</div>
 					<span>
-						<a class="menuLink" href="menu2.html">Menu4</a>
+						<a class="menuLink" href="javascript:void(0)" onclick="switch_menu(document.getElementById('menuDetail4')); return false;">JQuery</a>
 					</span>
-					<span>
-						<a class="menuLink" href="menu2.html">Menu5</a>
-					</span>
+					<div id=menuDetail4 style="display:none;">
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('EQ48ZpnN3ug'); return false;">JQuery 란?</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('KK2sK2lsqUk'); return false;">JavaScript vs JQuery</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('NonvqKoohKA'); return false;">wrapper</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('W3wqHEJn8Og'); return false;">선택자</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('JQdbZWdRtMc'); return false;">chain</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('e-Vuhy_6DsE'); return false;">event</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('QlvTtu5Lvrw'); return false;">앨리먼트 제어</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('FIw4DZ768MQ'); return false;">폼</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('3Z3J13D1Vao'); return false;">탐색</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('JO-rQMOl2KI'); return false;">에니매이션</a>
+							<a class="menuDetail" href="javascript:void(0)" onclick="lecture_change('fiqApu1t1Vc'); return false;">ajax</a>
+						</div>
 				</nav>
 			</div>
 		</aside>
-		<section>
-			<iframe name=content src="menu1.html">
-			</iframe>
+		<section id="mainSection">
+			<article style="color:white;">
+				광운대학교 컴퓨터소프트웨어학과 2012726043 이상윤의 
+				웹프로그래밍 수강과목 개인 프로젝트 홈페이지입니다.
+				<iframe id=content frameborder='0' allowfullscreen></iframe>
+				<input type="image" src="./images/notepad.png" onclick="switch_menu(document.getElementById('notepad'));" style = " width:50px; height:50px; float:right;">
+				<div id="notepad" style="color:white; display:none;">
+					제목 : <input type="text" size="30" id="subjectTxt">
+					<p></p>
+					<textarea id="contentTxt" rows="20" cols="58" style="resize:none;"></textarea>
+					<span>
+						<input type="button" value="메일로 보내기" onClick="sendEmail();">
+						<input type="button" value="초기화" onClick="clearMsg();">
+					</span>
+				</div>
+			</article>
 		</section>
 		<footer>
-			<b>html, css 을 이용한 웹프로그래밍 개인 프로젝트를 위해 제작한 사이트입니다. </b>
+			<b>html, css, JavaScript 를 이용한 웹프로그래밍 개인 프로젝트를 위해 제작한 사이트입니다. </b>
 		</footer>
 	</center>
+
 </body>
 </html>
